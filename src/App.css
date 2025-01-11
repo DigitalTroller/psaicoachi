@@ -1,38 +1,182 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
   min-height: 100vh;
+  font-family: "Pixelify Sans", sans-serif;
+}
+
+/* Header Styling */
+.header {
+  width: 100%;
+  padding: 15px 15px;
+  background-color: black;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  user-select: none;
+}
+
+header a {
+  text-decoration: none;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.logo img {
+  width: 60px;
+  height: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logo a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+}
+
+.navbar a {
+  padding: 15px;
+}
+
+/* Main Section */
+.main {
+  background-color: white;
+  padding: 50px;
+}
+
+/* Forms */
+.surveyForm {
+  padding: 20px;
+}
+
+.surveyFormItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.surveyForm label {
+  color: black;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="range"] {
+  font-family: "Pixelify Sans", sans-serif;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+input[type="text"] {
+  max-width: 300px;
+  width: 100%;
+}
+
+input[type="number"] {
+  max-width: 80px;
+  width: 100%;
+}
+
+input[type="range"] {
+  appearance: none;
+  width: 200px;
+  height: 4px;
+  background-color: rgb(235, 235, 235);
+  margin: 15px 10px;
+  border-radius: 15px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background-color: black;
+  border: 3px solid black;
+  border-radius: 50%;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  background-color: white;
+}
+
+/* Buttons */
+button {
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  background-color: rgb(234, 234, 234);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Additional Components */
+.colorList {
+  height: fit-content;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(234, 234, 234);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.colorListItem {
+  display: flex;
+  padding: 5px;
+  gap: 10px;
+}
+
+.colorListItem div {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.colorListItem p {
+  font-family: "Pixelify Sans", sans-serif;
+}
+
+.colorCareer {
+  background-color: rgba(255, 153, 0, 0.8);
+}
+
+.colorFinance {
+  background-color: rgba(61, 0, 153, 0.8);
+}
+
+.colorHealth {
+  background-color: rgba(9, 171, 63, 0.8);
+}
+
+.colorFriends {
+  background-color: rgba(0, 127, 255, 0.8);
+}
+
+.colorLove {
+  background-color: rgba(204, 0, 0, 0.8);
+}
+
+.colorSelfdev {
+  background-color: rgba(255, 92, 119, 0.8);
+}
+
+.colorLeisure {
+  background-color: rgba(253, 233, 16, 0.8);
+}
+
+.colorLiving {
+  background-color: rgba(0, 0, 255, 0.8);
 }
