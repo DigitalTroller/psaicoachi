@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 
 const Wheel = () => {
   const [values, setValues] = useState({
-    career: 1,
-    finance: 1,
     health: 1,
-    friends: 1,
-    love: 1,
-    selfdev: 1,
-    leisure: 1,
-    living: 1,
+    career: 1,
+    relationships: 1,
+    personalDevelopment: 1,
+    finances: 1,
   });
 
   const [result, setResult] = useState(""); // To store the result from the backend
@@ -22,50 +19,48 @@ const Wheel = () => {
     });
   };
 
-  // Function to fetch the result from the backend
   const handleShowResult = async () => {
     try {
-      const response = await fetch('/api/wheel', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8080/balance-category/recommendation", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(values), // Send the current wheel values
       });
-
+  
       if (response.ok) {
         const data = await response.json();
-        setResult(data.result); // Set the result from the response
+        setResult(data.result); // Assuming `data.result` contains the recommendation
       } else {
-        console.error('Error fetching result');
+        console.error("Error fetching recommendation");
+        setResult("Failed to fetch recommendation. Please try again.");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
+      setResult("An error occurred while fetching the recommendation.");
     }
   };
+  
 
   useEffect(() => {
     const drawWheel = () => {
       const wcanvas = document.getElementById("wheelCanvas");
       const dctx = wcanvas.getContext("2d");
       const radius = 200;
-      const sectors = 8;
+      const sectors = 5;
       const maxLevel = 10;
 
       const data = [
-        values.career,
-        values.finance,
         values.health,
-        values.friends,
-        values.love,
-        values.selfdev,
-        values.leisure,
-        values.living,
+        values.career,
+        values.relationships,
+        values.personalDevelopment,
+        values.finances,
       ];
 
       const colors = [
-        "#ff9900", "#3d0099", "#09ab3f", "#007fff", "#cc0000", "#ff5c77",
-        "#fde910", "#0000ff",
+        "#ff9900", "#3d0099", "#09ab3f", "#007fff", "#cc0000",
       ];
 
       let userRadii = new Array(sectors).fill(0);
@@ -149,23 +144,31 @@ const Wheel = () => {
         ))}
       </div>
 
-      {/* Show result button */}
       <div className="inputWheelItem resultButtonContainer">
         <button
           id="showResultBtn"
           onClick={handleShowResult}
           className="showResultBtn"
-        >
-          Show result
+          >
+            Show result
         </button>
       </div>
+
+      {/* Display the result */}
+      {result && (
+        <div className="result">
+          <h3>Wheel Results:</h3>
+          <p>{result}</p>
+        </div>
+      )}
+
 
       {/* Render wheel */}
       <canvas id="wheelCanvas" width="400" height="400"></canvas>
 
       {/* Color legend */}
       <div className="colorList">
-        {["Career", "Finance", "Health", "Friends", "Love", "Self-development", "Leisure", "Living conditions"].map((label, index) => (
+        {["Health", "Career", "Relationships", "Personal Development", "Finances"].map((label, index) => (
           <div className="colorListItem" key={index}>
             <div className={`color${label.replace(" ", "")}`}></div>
             <p className={label.replace(" ", "").toLowerCase()}>{label}</p>
