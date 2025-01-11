@@ -30,17 +30,23 @@ const Wheel = () => {
       });
   
       if (response.ok) {
-        const data = await response.json();
-        setResult(data.result); // Assuming `data.result` contains the recommendation
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          setResult(data.result);
+        } else {
+          const plainText = await response.text(); // Handle plain text response
+          setResult(plainText);
+        }
       } else {
-        console.error("Error fetching recommendation");
-        setResult("Failed to fetch recommendation. Please try again.");
+        setResult(`Error: ${response.status} ${response.statusText}`);
       }
     } catch (error) {
       console.error("Error:", error);
-      setResult("An error occurred while fetching the recommendation.");
+      setResult("An error occurred. Please check the backend or try again later.");
     }
   };
+  
   
 
   useEffect(() => {
@@ -175,14 +181,6 @@ const Wheel = () => {
           </div>
         ))}
       </div>
-
-      {/* Display the result */}
-      {result && (
-        <div className="result">
-          <h3>Wheel Results:</h3>
-          <p>{result}</p>
-        </div>
-      )}
     </main>
   );
 };
